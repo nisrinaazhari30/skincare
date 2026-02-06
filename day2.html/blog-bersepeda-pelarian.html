@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quarter - Bersepeda: Pelarian yang Menyehatkan</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- 1. SETUP GLOBAL --- */
+        :root {
+            --bg-color: #FAFAFA;
+            --text-dark: #1A1A1A;
+            --text-grey: #666666;
+            --accent-brown: #8C6B50;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Lato', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- NAVBAR --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 50px;
+            background: var(--bg-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-brown);
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .nav-icons a:hover {
+            color: var(--accent-brown);
+        }
+
+        .burger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* --- ARTICLE DETAIL SECTION --- */
+        .article-section {
+            padding: 80px 20px;
+            background-color: #fff;
+            min-height: 80vh;
+        }
+
+        .article-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 30px;
+            color: var(--accent-brown);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .article-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .article-header h1 {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            color: var(--text-dark);
+        }
+
+        .article-meta {
+            color: var(--text-grey);
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .article-meta i {
+            color: var(--accent-brown);
+            margin-right: 5px;
+        }
+
+        .article-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #444;
+            text-align: justify;
+        }
+
+        .article-content p {
+            margin-bottom: 25px;
+        }
+
+        .article-content img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 40px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--bg-color);
+            padding: 60px 50px 30px;
+            border-top: 1px solid #ddd;
+            margin-top: 0;
+        }
+
+        /* WA Float */
+        .wa-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            z-index: 100;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        #scrollTopBtn {
+            display: none;
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            z-index: 99;
+            border: none;
+            outline: none;
+            background-color: var(--accent-brown);
+            color: white;
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, transform 0.3s;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #scrollTopBtn.show {
+            display: flex;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            nav {
+                padding: 20px;
+            }
+
+            .burger {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: var(--bg-color);
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                z-index: 100;
+                align-items: center;
+                gap: 20px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-icons {
+                display: none;
+            }
+
+            .article-header h1 {
+                font-size: 2rem;
+            }
+
+            .article-section {
+                padding: 40px 20px;
+            }
+        }
+
+        /* --- NEW STYLES FOR STANDARD ARTICLE --- */
+        /* Main Image & Caption */
+        .main-article-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .img-caption {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-grey);
+            font-style: italic;
+            margin-bottom: 30px;
+            display: block;
+        }
+
+        /* Table of Contents */
+        .toc-container {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 30px 0;
+            width: 100%;
+        }
+
+        .toc-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            margin-bottom: 0;
+        }
+
+        .toc-header h3 {
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            margin: 0;
+        }
+
+        .toc-list {
+            list-style: none;
+            margin-top: 15px;
+            padding-left: 10px;
+            display: none;
+            /* Hidden by default or toggled */
+        }
+
+        .toc-list.active {
+            display: block;
+        }
+
+        .toc-list li {
+            margin-bottom: 10px;
+        }
+
+        .toc-list li a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .toc-list li a:hover {
+            color: var(--accent-brown);
+            text-decoration: underline;
+        }
+
+        .toc-list .toc-sub {
+            padding-left: 20px;
+            margin-top: 5px;
+            font-size: 0.95rem;
+        }
+
+        /* Headers within content */
+        .article-content h2 {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+            border-bottom: 2px solid var(--accent-brown);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .article-content h3 {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        /* Blockquote */
+        .blockquote-custom {
+            border-left: 5px solid var(--accent-brown);
+            background-color: #fafafa;
+            padding: 20px;
+            margin: 30px 0;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        /* Read Also */
+        .read-also {
+            background-color: #fff3e0;
+            padding: 15px;
+            border-left: 5px solid #ff9800;
+            margin: 30px 0;
+        }
+
+        .read-also p {
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .read-also a {
+            color: #e65100;
+            text-decoration: underline;
+        }
+
+        /* Promo GIF */
+        .promo-gif {
+            width: 100%;
+            max-width: 600px;
+            margin: 30px auto;
+            display: block;
+            border-radius: 8px;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            margin-top: 50px;
+            background: #fff;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+        }
+
+        .faq-question {
+            font-weight: bold;
+            font-family: var(--font-heading);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            margin-top: 10px;
+            color: var(--text-grey);
+            display: none;
+        }
+
+        .faq-answer.active {
+            display: block;
+        }
+
+        /* Conclusion */
+        .conclusion {
+            background-color: #f4f4f4;
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 40px;
+        }
+
+        /* Author Profile */
+        .author-box {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border: 1px solid #eee;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 50px;
+        }
+
+        .author-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .author-info p {
+            font-size: 0.9rem;
+            color: var(--text-grey);
+            margin: 0;
+        }
+
+        /* Share Buttons */
+        .share-section {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .share-btn {
+            padding: 10px 20px;
+            border-radius: 30px;
+            color: white;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .share-wa {
+            background-color: #25D366;
+        }
+
+        .share-fb {
+            background-color: #1877F2;
+        }
+
+        .share-tw {
+            background-color: #1DA1F2;
+        }
+
+        /* Related Articles */
+        .related-section {
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 1px solid #eee;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .related-card {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .related-card:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .related-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .related-content {
+            padding: 20px;
+        }
+
+        .related-content h4 {
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .related-content p {
+            font-size: 0.9rem;
+            color: var(--text-grey);
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .related-btn {
+            display: inline-block;
+            color: var(--accent-brown);
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .related-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">Quarter.</div>
+        <div class="burger" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="about.html">Why Us</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="blog.html" style="color: var(--accent-brown);">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-icons">
+            <a href="about.html">About</a>
+            <a href="contact.html">FAQ'S</a>
+            <a href="products.html">Order</a>
+        </div>
+    </nav>
+
+    <section class="article-section">
+        <div class="article-container">
+            <a href="blog.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Blog</a>
+
+            <header class="article-header">
+                <h1>Bersepeda: Pelarian yang Menyehatkan di Tengah Kesibukan</h1>
+                <div class="article-meta">
+                    <span><i class="far fa-calendar"></i> February 6, 2026</span>
+                    <span><i class="far fa-user"></i> Quarter Team</span>
+                    <span><i class="far fa-clock"></i> 8 min read</span>
+                </div>
+            </header>
+
+            <figure>
+                <img src="https://images.unsplash.com/photo-1571068316344-75bc76f77890?q=80&w=1000&auto=format&fit=crop"
+                    alt="Bersepeda di Alam" class="main-article-image">
+                <figcaption class="img-caption">Menemukan ketenangan di tengah alam dengan bersepeda.</figcaption>
+            </figure>
+
+            <p>Di tengah kehidupan modern yang penuh dengan berbagai tuntutan, banyak orang yang merasa
+                kelelahan bukan cuma secara fisik tetapi lelah dari segi mental. Aktivitas yang padat biasanya
+                sering membuat kita lupa akan pentingnya rehat sebentar untuk mengistirahatkan diri kita
+                sendiri. Di sinilah kegiatan bersepeda bisa menjadi pilihan yang baik, kegiatan bersepeda hadir
+                sebagai bentuk pelarian untuk diri sendiri ketika sudah merasa lelah dengan kegiatan yang sudah
+                banyak menguras mental.</p>
+
+            <!-- Table of Contents -->
+            <div class="toc-container">
+                <div class="toc-header" onclick="toggleTOC()">
+                    <h3>Daftar Isi</h3>
+                    <i class="fas fa-chevron-down" id="tocIcon"></i>
+                </div>
+                <ul class="toc-list" id="tocList">
+                    <!-- Auto Generated by JS -->
+                </ul>
+            </div>
+
+            <div class="read-also">
+                <p>Baca Juga: <a href="blog-manfaat-bersepeda.html">Manfaat Bersepeda untuk Kesehatan Fisik dan
+                        Mental</a></p>
+            </div>
+
+            <h2 id="pelarian-rutinitas">Pelarian dari Rutinitas</h2>
+            <blockquote class="blockquote-custom">
+                "Terkadang, yang kita butuhkan hanyalah angin yang menerpa wajah dan jalan panjang di depan mata."
+            </blockquote>
+            <p>Bersepeda ga cuma sekedar kegiatan fisik atau kegiatan yang menghabiskan waktu. Buat beberapa
+                orang, bersepeda merupakan kegiatan yang bisa memberi kenyamanan untuk diri sendiri dan bentuk
+                mencintai diri sendiri. Ketika roda berputar dan kaki mengayuh sepeda, bisa muncul perasaan
+                yang nyaman dan bahagia yang sulit dijelaskan oleh kata-kata. Ada ketenangan yang secara
+                tiba-tiba hadir, seakan-akan punya kesempatan untuk pikiran dan bisa bernafas dengan lebih
+                lega.</p>
+
+            <h2 id="self-love">Mencintai Diri Sendiri</h2>
+            <img src="https://images.unsplash.com/photo-1541625602330-2277a4c46182?q=80&w=1000&auto=format&fit=crop"
+                alt="Sepeda di Pedesaan">
+            <figcaption class="img-caption">Suasana pedesaan yang tenang cocok untuk refleksi diri.</figcaption>
+
+            <p>Alasan utama kenapa banyak orang yang memilih bersepeda sebagai hobi utamanya adalah karena
+                dengan bersepeda ada kebahagiaan tersendiri yang dirasakan. Kegiatan ini menjadi salah satu
+                bentuk untuk mencintai diri sendiri dengan cara yang sehat dan efektif. Dengan meluangkan waktu
+                untuk bersepeda, sebagian orang sebenarnya memberikan hadiah untuk dirinya sendiri dalam bentuk
+                waktu, perhatian, dan ketenangan jiwa.</p>
+
+            <div class="read-also">
+                <p>Baca Juga: <a href="services.html">Layanan Spa untuk Relaksasi Maksimal</a></p>
+            </div>
+
+            <!-- Promo GIF -->
+            <img src="https://media.giphy.com/media/l0HlOaQcLJ2hHpYkg/giphy.gif" alt="Cycling GIF" class="promo-gif">
+
+            <h2 id="waktu-terbaik">Waktu Terbaik untuk Healing</h2>
+            <p>Supaya ga mengganggu kegiatan-kegiatan utama, biasanya bersepeda dilakukan pada waktu tertentu,
+                pada sore hari saat kegiatan selesai atau di hari minggu. Sore adalah waktu yang pas buat
+                meredakan stress setelah beraktivitas seharian. Tapi bagi sebagian orang yang hobi bersepeda,
+                pagi hari di hari minggu memiliki waktu yang spesial karena suasananya masih terasa sangat
+                sejuk, jalanan yang ga terlalu ramai dan tidak perlu memikirkan hal-hal berat yang membuat
+                bersepeda jauh lebih menyenangkan.</p>
+
+            <h2 id="manfaat-fisik-mental">Manfaat Fisik & Mental</h2>
+            <p>Selain memberikan ketenangan pikiran, bersepeda juga memberikan keuntungan bagi kesehatan fisik.
+                Aktivitas ini dapat menyehatkan jantung, memperkuat massa otot, dan meningkatkan kesehatan
+                tubuh. Yang menarik, keuntungan itu dapat dirasakan sambil menikmati perjalanan tanpa merasa
+                tertekan. Inilah yang menjadikan bersepeda istimewa, gabungan antara olahraga dan rekreasi
+                dalam satu kesempatan.</p>
+
+            <!-- FAQ Section -->
+            <div class="faq-section">
+                <h2 id="faq">Frequently Asked Questions</h2>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        Apakah bersepeda bisa mengurangi stres?
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Sangat bisa. Bersepeda memicu pelepasan endorfin yang meningkatkan mood dan mengurangi hormon
+                        stres.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conclusion -->
+            <div class="conclusion">
+                <h2 id="kesimpulan" style="margin-top:0;">Kesimpulan</h2>
+                <p style="margin-bottom:0;">Pada akhirnya, bersepeda adalah sesuatu yang lebih dalam daripada sekedar
+                    olahraga. Ini adalah
+                    sebuah perjalanan yang santai yang menyenangkan dan membuat pikiran menjadi lebih tenang.
+                    Dengan menentukan saat yang tepat, memilih tempat yang menyenangkan, dan mengutamakan
+                    keselamatan, bersepeda bisa menjadi metode yang paling mudah untuk merawat diri. Setiap kali
+                    kita mengayuh, kita tidak hanya bergerak maju di jalan, tetapi juga semakin dekat dengan diri
+                    kita sendiri sehingga menuju kebahagiaan yang tidak bisa diungkapkan dengan kata-kata.</p>
+            </div>
+
+            <!-- Promo GIF 2 -->
+            <img src="https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif" alt="Cycling Lifestyle GIF"
+                class="promo-gif">
+
+
+            <!-- Author Profile -->
+            <div class="author-box">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop"
+                    alt="Author" class="author-img">
+                <div class="author-info">
+                    <h4>Ditulis oleh: Sarah Amelia</h4>
+                    <p>Content Writer di Quarter. Pecinta alam dan gaya hidup sehat yang gemar bersepeda di akhir pekan.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Share Buttons -->
+            <div class="share-section">
+                <h4>Bagikan artikel ini:</h4>
+                <div class="share-buttons">
+                    <a href="https://wa.me/?text=Baca artikel ini: Bersepeda: Pelarian yang Menyehatkan" target="_blank"
+                        class="share-btn share-wa">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                    <a href="#" class="share-btn share-fb">
+                        <i class="fab fa-facebook-f"></i> Facebook
+                    </a>
+                    <a href="#" class="share-btn share-tw">
+                        <i class="fab fa-twitter"></i> Twitter
+                    </a>
+                </div>
+            </div>
+
+            <!-- Related Articles -->
+            <div class="related-section">
+                <h2 style="font-family: var(--font-heading);">Artikel Terkait</h2>
+                <div class="related-grid">
+                    <div class="related-card">
+                        <img src="https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?q=80&w=600&auto=format&fit=crop"
+                            alt="Artikel 1" class="related-img">
+                        <div class="related-content">
+                            <h4>Manfaat Bersepeda untuk Kesehatan</h4>
+                            <p>Pelajari lebih lanjut tentang bagaimana bersepeda meningkatkan kesehatan fisik dan
+                                mental...</p>
+                            <a href="blog-manfaat-bersepeda.html" class="related-btn">Baca Selengkapnya</a>
+                        </div>
+                    </div>
+                    <div class="related-card">
+                        <img src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?q=80&w=600&auto=format&fit=crop"
+                            alt="Services" class="related-img">
+                        <div class="related-content">
+                            <h4>Layanan Terbaik untuk Kulitmu</h4>
+                            <p>Kenali berbagai layanan perawatan wajah yang kami tawarkan untuk mendukung hobimu...</p>
+                            <a href="services.html" class="related-btn">Baca Selengkapnya</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 40px;">
+            <div>
+                <h3 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 20px;">Quarter.</h3>
+                <p style="color: var(--text-grey); max-width: 300px;">Redefining beauty with nature and technology. Join
+                    us on our journey to better skin.</p>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div>
+                    <h4 style="font-weight: bold; margin-bottom: 15px; text-transform: uppercase; font-size: 0.85rem;">
+                        Company</h4>
+                    <ul
+                        style="color: var(--text-grey); font-size: 0.9rem; display: flex; flex-direction: column; gap: 10px;">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="products.html">Products</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="font-weight: bold; margin-bottom: 15px; text-transform: uppercase; font-size: 0.85rem;">
+                        Support</h4>
+                    <ul
+                        style="color: var(--text-grey); font-size: 0.9rem; display: flex; flex-direction: column; gap: 10px;">
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="contact.html">FAQ</a></li>
+                        <li><a href="contact.html">Shipping</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div
+            style="text-align: center; border-top: 1px solid #eee; padding-top: 30px; color: #999; font-size: 0.85rem;">
+            <p>&copy; 2026 Quarter Skincare. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/6281946604721?text=Halo, saya tertarik dengan produk Quarter Skincare" class="wa-float"
+        target="_blank" title="Live Chat">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <button id="scrollTopBtn" title="Go to top"><i class="fas fa-arrow-up"></i></button>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                const navLinks = document.querySelector('.nav-links');
+                if (navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+
+        const scrollTopBtn = document.getElementById("scrollTopBtn");
+        window.onscroll = function () { scrollFunction(); };
+        function scrollFunction() {
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                scrollTopBtn.classList.add("show");
+            } else {
+                scrollTopBtn.classList.remove("show");
+            }
+        }
+        scrollTopBtn.addEventListener("click", function () {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        /* --- AUTOMATIC TOC GENERATION --- */
+        document.addEventListener('DOMContentLoaded', function () {
+            const articleContent = document.querySelector('.article-content');
+            const tocList = document.getElementById('tocList');
+            const headers = articleContent.querySelectorAll('h2, h3');
+
+            headers.forEach(header => {
+                // Ignore FAQ title or Conclusion if needed, but usually we want them in TOC
+                if (header.innerText === 'Frequently Asked Questions' || header.innerText === 'Artikel Terkait') return;
+
+                const id = header.id || header.innerText.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
+                header.id = id;
+
+                const li = document.createElement('li');
+                const link = document.createElement('a');
+                link.href = '#' + id;
+                link.innerText = header.innerText;
+
+                if (header.tagName === 'H3') {
+                    li.classList.add('toc-sub');
+                }
+
+                li.appendChild(link);
+                tocList.appendChild(li);
+            });
+
+            // If TOC is empty, hide container
+            if (headers.length === 0) {
+                document.querySelector('.toc-container').style.display = 'none';
+            } else {
+                // Auto open TOC for visibility on desktop
+                if (window.innerWidth > 768) {
+                    document.getElementById('tocList').classList.add('active');
+                    document.getElementById('tocIcon').classList.remove('fa-chevron-down');
+                    document.getElementById('tocIcon').classList.add('fa-chevron-up');
+                }
+            }
+        });
+
+        function toggleTOC() {
+            const tocList = document.getElementById('tocList');
+            const tocIcon = document.getElementById('tocIcon');
+            tocList.classList.toggle('active');
+
+            if (tocList.classList.contains('active')) {
+                tocIcon.classList.remove('fa-chevron-down');
+                tocIcon.classList.add('fa-chevron-up');
+            } else {
+                tocIcon.classList.remove('fa-chevron-up');
+                tocIcon.classList.add('fa-chevron-down');
+            }
+        }
+
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('i');
+            answer.classList.toggle('active');
+
+            if (answer.classList.contains('active')) {
+                icon.classList.remove('fa-plus');
+                icon.classList.add('fa-minus');
+            } else {
+                icon.classList.remove('fa-minus');
+                icon.classList.add('fa-plus');
+            }
+        }
+    </script>
+</body>
+
+</html>

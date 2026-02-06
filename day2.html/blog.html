@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quarter - Our Blog</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- 1. SETUP GLOBAL --- */
+        :root {
+            --bg-color: #FAFAFA;
+            --text-dark: #1A1A1A;
+            --text-grey: #666666;
+            --accent-brown: #8C6B50;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Lato', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- NAVBAR --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 50px;
+            background: var(--bg-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-brown);
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .nav-icons a:hover {
+            color: var(--accent-brown);
+        }
+
+        .burger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* --- BLOG LANDING SECTION --- */
+        .blog-section {
+            padding: 80px 50px;
+            background-color: white;
+            /* Matches reference clean BG */
+            min-height: 80vh;
+        }
+
+        .blog-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .blog-header h2 {
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .blog-header p {
+            color: var(--text-grey);
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* BLOG GRID */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            /* 3 Columns like the reference */
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* CARD STYLES */
+        .blog-card {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+            /* Card shadow for "floating" effect like reference */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .blog-img-container {
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .blog-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .blog-card:hover .blog-img {
+            transform: scale(1.05);
+        }
+
+        .blog-card-content {
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .blog-date {
+            font-size: 0.8rem;
+            color: var(--text-grey);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .blog-title {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .blog-title a {
+            color: inherit;
+        }
+
+        .blog-title a:hover {
+            color: #5BA890;
+            /* Green highlight like reference, or stay w/ brown? 
+                               Actually reference uses a nice green. 
+                               Let's use a green that complements existing brown or stick to Quarter theme.
+                               User asked "sesuai dengan tema saya" (Quarter theme).
+                               So I will stick to --accent-brown but maybe a lighter shade on hover? 
+                               Or maybe I'll use a specific highlight color if needed. 
+                               Let's stick to var(--accent-brown) for consistency. */
+            color: var(--accent-brown);
+        }
+
+        .blog-excerpt {
+            color: var(--text-grey);
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            flex-grow: 1;
+        }
+
+        .read-more-btn {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--accent-brown);
+            /* "Quarter" brown usually, but reference had green. Sticking to theme. */
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .read-more-btn:hover {
+            gap: 12px;
+            /* Micro animation */
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--bg-color);
+            padding: 60px 50px 30px;
+            border-top: 1px solid #ddd;
+            margin-top: 0;
+        }
+
+        .wa-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            z-index: 100;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        #scrollTopBtn {
+            display: none;
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            z-index: 99;
+            border: none;
+            outline: none;
+            background-color: var(--accent-brown);
+            color: white;
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, transform 0.3s;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #scrollTopBtn.show {
+            display: flex;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 992px) {
+            .blog-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                padding: 20px;
+            }
+
+            .burger {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: var(--bg-color);
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                z-index: 100;
+                align-items: center;
+                gap: 20px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-icons {
+                display: none;
+            }
+
+            .blog-section {
+                padding: 40px 20px;
+            }
+
+            .blog-header h2 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">Quarter.</div>
+
+        <!-- Burger Icon -->
+        <div class="burger" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="about.html">Why Us</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="blog.html" style="color: var(--accent-brown);">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+
+        <div class="nav-icons">
+            <a href="about.html">About</a>
+            <a href="contact.html">FAQ'S</a>
+            <a href="products.html">Order</a>
+        </div>
+    </nav>
+
+    <!-- BLOG LANDING SECTION -->
+    <section class="blog-section">
+        <div class="blog-header">
+            <h2>Our Latest Stories</h2>
+            <p>Insights into healthy living, skincare tips, and updates from the Quarter team.</p>
+        </div>
+
+        <div class="blog-grid">
+
+            <!-- Card 1 -->
+            <div class="blog-card">
+                <div class="blog-img-container">
+                    <a href="blog-bersepeda-pelarian.html">
+                        <img src="https://images.unsplash.com/photo-1571068316344-75bc76f77890?q=80&w=1000&auto=format&fit=crop"
+                            alt="Bersepeda" class="blog-img">
+                    </a>
+                </div>
+                <div class="blog-card-content">
+                    <div class="blog-date">February 06, 2026</div>
+                    <h3 class="blog-title"><a href="blog-bersepeda-pelarian.html">Bersepeda: Pelarian yang
+                            Menyehatkan</a></h3>
+                    <p class="blog-excerpt">
+                        Di tengah kehidupan modern yang penuh tuntutan, banyak orang merasa kelelahan mental. Bersepeda
+                        hadir sebagai solusi...
+                    </p>
+                    <a href="blog-bersepeda-pelarian.html" class="read-more-btn">Read More <i
+                            class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="blog-card">
+                <div class="blog-img-container">
+                    <a href="blog-manfaat-bersepeda.html">
+                        <img src="https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?q=80&w=1000&auto=format&fit=crop"
+                            alt="Manfaat Bersepeda" class="blog-img">
+                    </a>
+                </div>
+                <div class="blog-card-content">
+                    <div class="blog-date">February 05, 2026</div>
+                    <h3 class="blog-title"><a href="blog-manfaat-bersepeda.html">Manfaat Bersepeda untuk Kesehatan</a>
+                    </h3>
+                    <p class="blog-excerpt">
+                        Di zaman modern ini, banyak orang mencari metode menjaga kesehatan tanpa olahraga berat.
+                        Bersepeda adalah pilihan tepat...
+                    </p>
+                    <a href="blog-manfaat-bersepeda.html" class="read-more-btn">Read More <i
+                            class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Placeholder for future Post (Optional, to show 3rd column if user wants, but currently we only have 2 blog posts) -->
+            <!-- We will leave it with 2 cards. The grid will handle it nicely. -->
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 40px;">
+            <div>
+                <h3 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 20px;">Quarter.</h3>
+                <p style="color: var(--text-grey); max-width: 300px;">Redefining beauty with nature and technology. Join
+                    us on our journey to better skin.</p>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div>
+                    <h4 style="font-weight: bold; margin-bottom: 15px; text-transform: uppercase; font-size: 0.85rem;">
+                        Company</h4>
+                    <ul
+                        style="color: var(--text-grey); font-size: 0.9rem; display: flex; flex-direction: column; gap: 10px;">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="products.html">Products</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="font-weight: bold; margin-bottom: 15px; text-transform: uppercase; font-size: 0.85rem;">
+                        Support</h4>
+                    <ul
+                        style="color: var(--text-grey); font-size: 0.9rem; display: flex; flex-direction: column; gap: 10px;">
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="contact.html">FAQ</a></li>
+                        <li><a href="contact.html">Shipping</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div
+            style="text-align: center; border-top: 1px solid #eee; padding-top: 30px; color: #999; font-size: 0.85rem;">
+            <p>&copy; 2026 Quarter Skincare. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/6281946604721?text=Halo, saya tertarik dengan produk Quarter Skincare" class="wa-float"
+        target="_blank" title="Live Chat">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Scroll To Top Button -->
+    <button id="scrollTopBtn" title="Go to top"><i class="fas fa-arrow-up"></i></button>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+
+        // Close menu when clicking on a link (mobile)
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                const navLinks = document.querySelector('.nav-links');
+                if (navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+
+        /* Scroll to Top Logic */
+        const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+        window.onscroll = function () {
+            scrollFunction();
+        };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                scrollTopBtn.classList.add("show");
+            } else {
+                scrollTopBtn.classList.remove("show");
+            }
+        }
+
+        scrollTopBtn.addEventListener("click", function () {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+
+</html>
